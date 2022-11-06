@@ -1,0 +1,24 @@
+
+<%= simple_form_for(@product) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :price %>
+    <%= f.input :dairy_free %>
+    <%= f.input :gluten_free %>
+    <%= f.input :kosher %>
+    <%= f.input :peanut_free %>
+    <%= f.input :vegan %>
+    <%= f.input :vegetarian %>
+    <%= f.input :available %>
+    <%= f.input :catering %>
+    <%= f.input :featured %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
