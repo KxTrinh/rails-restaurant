@@ -10,13 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_06_221244) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_06_224005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "product_id", null: false
+    t.bigint "order_id", null: false
+    t.decimal "total"
+    t.decimal "unit_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+    t.index ["product_id"], name: "index_order_items_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.decimal "subtotal"
+    t.decimal "total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name", default: ""
+    t.text "description", default: ""
+    t.decimal "price", default: "0.0"
+    t.boolean "dairy_free", default: false
+    t.boolean "gluten_free", default: false
+    t.boolean "kosher", default: false
+    t.boolean "peanut_free", default: false
+    t.boolean "vegan", default: false
+    t.boolean "vegetarian", default: false
+    t.boolean "available", default: true
+    t.boolean "catering", default: false
+    t.boolean "featured", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.boolean "admin", default: false, null: false
+    t.string "username", default: "default"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -26,4 +64,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_06_221244) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
 end
