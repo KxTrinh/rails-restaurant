@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   get 'catering', to: 'pages#catering'
   get 'info', to: 'pages#info'
+  get 'menu', to: 'menus#index'
 end

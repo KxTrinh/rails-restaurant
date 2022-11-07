@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+require "faker"
+
 User.destroy_all
 Product.destroy_all
 
@@ -15,8 +17,12 @@ User.create!(email: "kev@mail.com",
              admin: true )
 
 25.times do |i|
-  Product.create!(name: "Pizza",
-                  descriptio: "Description test",
+  Product.create!(name: Faker::Food.dish,
+                  # description: Faker::ChuckNorris.fact,
+                  description: Faker::Food.description,
                   price: 11.99,
-                  catering_item: true )
+                  catering: true )
 end
+
+
+puts "finished !!"
