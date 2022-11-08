@@ -20,7 +20,7 @@ User.create!(email: "kev@mail.com",
   Product.create!(name: Faker::Food.dish,
                   # description: Faker::ChuckNorris.fact,
                   description: Faker::Food.description,
-                  price: 11.99,
+                  price: rand(1..20),
                   catering: true )
 end
 
