@@ -1,6 +1,6 @@
 <div class="row">
   <% @cats.each do |cat| %>
-    <% if  cat.products.where(featured: true).first.image.attached?%>
+    <% if cat.products.where(featured: true).first.image.attached? %>
       <%=  image_tag(cat.products.where(featured: true).first.image, class:'img-fluid') %>
     <% end %>
     <div class="col-12">
@@ -10,17 +10,19 @@
       <hr />
     </div>
     <% products.each do |product| %>
-      <div class="col-4">
-        <h5>
-          <%= product.name %>
-        </h5>
-        <p>
-          <%= product.description%>
-        </p>
-        <span>
-          <%= product.price %> <%= "| Available for catering" if product.catering %>
-        </span>
-      </div>
+      <% if product.category == cat %>
+        <div class="col-4">
+          <h5>
+            <%= product.name %>
+          </h5>
+          <p>
+            <%= product.description%>
+          </p>
+          <span>
+            <%= product.price %> <%= "| Available for catering" if product.catering %>
+          </span>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 </div>

@@ -12,7 +12,7 @@
                                                         'Kosher',
                                                         'Peanut Free',
                                                         'Vegan',
-                                                        'Vegetarian']), class: 'custom-select' %>
+                                                        'Vegetarian']), class: 'custom-select', onChange: 'clickSubmit()' %>
 
             <%= submit_tag "Search", class: 'btn bt-dark', id: 'search_submit', style:'display:none' %>
           </div>
@@ -21,7 +21,7 @@
     </div>
   </div>
   <div id="menu-products-container">
-    <%= render 'menu/products'%>
+    <%= render 'menus/products', products: @products%>
   </div>
 </div>
 
