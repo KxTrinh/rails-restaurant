@@ -29,6 +29,7 @@ cat3 = Category.create!(heading: 'Desserts', body: "Rockj rails icecream", displ
                       description: Faker::Food.description,
                       price: 11.99,
                       catering: true,
+                      kosher: true,
                       category: Category.find(cat1.id)
                       )
 
@@ -37,6 +38,7 @@ cat3 = Category.create!(heading: 'Desserts', body: "Rockj rails icecream", displ
                       description: Faker::Food.description,
                       price: 7.95,
                       catering: true,
+                      vegan: true,
                       category: Category.find(cat2.id)
                       )
   dessert = Product.new(name: 'Dessert',
@@ -44,6 +46,7 @@ cat3 = Category.create!(heading: 'Desserts', body: "Rockj rails icecream", displ
                       description: Faker::Food.description,
                       price: 3.00,
                       catering: true,
+                      kosher: true,
                       category: Category.find(cat3.id)
                       )
 

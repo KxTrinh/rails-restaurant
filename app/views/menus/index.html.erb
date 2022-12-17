@@ -1,21 +1,36 @@
-<div class="menu-container">
+<div class="menu-container" data-controller="search-products">
   <div class="row">
     <div class="col-12">
-      <%= form_tag(search_path, method: "get", remote: true) do %>
-        <div class="input-group mb-5">
-          <div class="col-8" style="padding:0">
-            <%= text_field_tag :search, '', class:'form-control', placeholder: 'Search...', onkeydown:'clickSubmit();' %>
-          </div>
-          <div class="col-4" style="padding:0">
-            <%= select_tag "filter", options_for_select(['Select Filter',
-                                                        'Dairy free',
-                                                        'Kosher',
-                                                        'Peanut Free',
-                                                        'Vegan',
-                                                        'Vegetarian']), class: 'custom-select', onChange: 'clickSubmit()' %>
 
-            <%= submit_tag "Search", class: 'btn bt-dark', id: 'search_submit', style:'display:none' %>
-          </div>
+      <%= form_with url: menu_path, method: :get, html: {class:
+        "mb-5 d-flex", data: {search_products_target: "form"}} do |f| %>
+        <div class="col-8" style="padding:0">
+          <%= f.text_field :query,
+                          class: "form-control",
+                          placeholder: "Search...",
+                          value: params[:query],
+                          data: {
+                                  search_products_target: "input",
+                                  action: "keyup->search-products#update" 
+                                } %>
+        </div>
+
+        <div class="col-4" style="padding:0">
+          <%= select_tag :filter, options_for_select(['Select Filter',
+                                                      'Dairy free',
+                                                      'Kosher',
+                                                      'Peanut Free',
+                                                      'Vegan',
+                                                      'Vegetarian']), 
+                                                      class: 'custom-select', 
+                                                      value: params[:filter],
+                                                      # onChange: 'clickSubmit()', 
+                                                      data: {
+                                                              search_products_target: "filter", 
+                                                              action: "click->search-products#update"
+                                                            } %>
+
+          <%= submit_tag "Search", class: 'btn bt-dark', id: 'search_submit', style:'display:none' %>
         </div>
       <% end %>
     </div>
@@ -24,6 +39,7 @@
     <%= render 'menus/products', products: @products%>
   </div>
 </div>
+<%= console %>
 
 
 <script>
