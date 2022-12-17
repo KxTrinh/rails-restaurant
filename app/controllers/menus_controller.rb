@@ -4,6 +4,7 @@ class MenusController < ApplicationController
   def index
     @products = Product.all
     @page = 'menu'
+    @order_item = current_order.order_items.new
 
     if params[:query].present?
       @products = @products.where('name ILIKE ?', "%#{params[:query]}%")
