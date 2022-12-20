@@ -13,6 +13,7 @@ require "open-uri"
 User.destroy_all
 Product.destroy_all
 Category.destroy_all
+Order.destroy_all
 
 User.create!(email: "kev@mail.com",
              password: '123456',
